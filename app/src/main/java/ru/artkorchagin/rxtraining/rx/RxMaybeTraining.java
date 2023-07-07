@@ -3,7 +3,6 @@ package ru.artkorchagin.rxtraining.rx;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import ru.artkorchagin.rxtraining.exceptions.NotImplementedException;
 
 /**
  * @author Arthur Korchagin (artur.korchagin@simbirsoft.com)
@@ -21,7 +20,7 @@ public class RxMaybeTraining {
      * либо не эммитит ничего, если {@code value} отрицательное
      */
     Maybe<Integer> positiveOrEmpty(Integer value) {
-        throw new NotImplementedException();
+        return Maybe.just(value).filter(v -> v > 0);
     }
 
     /**
@@ -32,7 +31,7 @@ public class RxMaybeTraining {
      * положительное число, иначе не эммитит ничего
      */
     Maybe<Integer> positiveOrEmpty(Single<Integer> valueSingle) {
-        throw new NotImplementedException();
+        return Maybe.fromSingle(valueSingle).filter(it -> it > 0);
     }
 
     /**
@@ -43,7 +42,7 @@ public class RxMaybeTraining {
      * последовательность пустая
      */
     Maybe<Integer> calculateSumOfValues(Observable<Integer> integerObservable) {
-        throw new NotImplementedException();
+        return integerObservable.reduce((accum, next) -> accum + next);
     }
 
     /**
@@ -54,7 +53,7 @@ public class RxMaybeTraining {
      * {@code defaultValue} если последовательность пустая
      */
     Single<Integer> leastOneElement(Maybe<Integer> integerMaybe, int defaultValue) {
-        throw new NotImplementedException();
+        return integerMaybe.toSingle(defaultValue);
     }
 
 }
